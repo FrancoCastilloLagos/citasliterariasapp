@@ -1,22 +1,32 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfiguracionService {
-  private configBorrarSubject = new BehaviorSubject<boolean>(false); // Inicialmente desactivado
+  private configBorrarSubject = new BehaviorSubject<boolean>(false); 
   configBorrar$ = this.configBorrarSubject.asObservable();
 
-  constructor() {}
+  constructor() {
+    this.cargarConfigBorrar();
+  }
 
-  // Obtener el valor actual
+  
+  async cargarConfigBorrar() {
+    const { value } = await Preferences.get({ key: 'configBorrar' });
+    if (value !== null) {
+      this.configBorrarSubject.next(JSON.parse(value));
+    }
+  }
+
   obtenerConfigBorrar(): boolean {
     return this.configBorrarSubject.value;
   }
 
-  // Establecer un nuevo valor y notificar a los suscriptores
-  establecerConfigBorrar(valor: boolean): void {
+  async establecerConfigBorrar(valor: boolean): Promise<void> {
+    await Preferences.set({ key: 'configBorrar', value: JSON.stringify(valor) });
     this.configBorrarSubject.next(valor);
   }
 }

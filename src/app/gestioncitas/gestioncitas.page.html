@@ -5,20 +5,34 @@
 </ion-header>
 
 <ion-content>
-  <!-- Formulario para agregar una nueva cita -->
-  <ion-item>
-    <ion-label position="floating">Frase</ion-label>
-    <ion-input [(ngModel)]="nuevaCita.frase" placeholder="Ingresa la cita"></ion-input>
-  </ion-item>
+  <form [formGroup]="formularioCita" (ngSubmit)="agregarCita()">
+    <ion-item>
+      <ion-label position="floating">Frase</ion-label>
+      <ion-input formControlName="frase" placeholder="Ingresa la cita"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="formularioCita.get('frase')?.touched && formularioCita.get('frase')?.errors?.['required']" color="danger">
+      La frase es obligatoria.
+    </ion-note>
+    <ion-note *ngIf="formularioCita.get('frase')?.touched && formularioCita.get('frase')?.errors?.['minlength']" color="danger">
+      La frase debe tener al menos 5 caracteres.
+    </ion-note>
 
-  <ion-item>
-    <ion-label position="floating">Autor</ion-label>
-    <ion-input [(ngModel)]="nuevaCita.autor" placeholder="Ingresa el autor"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">Autor</ion-label>
+      <ion-input formControlName="autor" placeholder="Ingresa el autor"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="formularioCita.get('autor')?.touched && formularioCita.get('autor')?.errors?.['required']" color="danger">
+      El autor es obligatorio.
+    </ion-note>
+    <ion-note *ngIf="formularioCita.get('autor')?.touched && formularioCita.get('autor')?.errors?.['minlength']" color="danger">
+      El nombre del autor debe tener al menos 2 caracteres.
+    </ion-note>
 
-  <ion-button expand="full" (click)="agregarCita()">Agregar Cita</ion-button>
+    <ion-button expand="full" type="submit" [disabled]="formularioCita.invalid">
+      Agregar Cita
+    </ion-button>
+  </form>
 
-  <!-- Lista de citas -->
   <ion-list>
     <ion-item *ngFor="let cita of citas">
       <ion-label>
@@ -26,7 +40,6 @@
         <p><strong>- {{ cita.autor }}</strong></p>
       </ion-label>
 
-      <!-- Botón rojo para borrar cada cita -->
       <ion-button color="danger" (click)="eliminarCita(cita)" expand="full" slot="end">
         Borrar
       </ion-button>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';  // Para el enrutamiento
+import { RouterOutlet } from '@angular/router';  
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
   standalone: true,
-  imports: [IonicModule, RouterOutlet, CommonModule]  // Importación de módulos correctos
+  imports: [IonicModule, RouterOutlet, CommonModule]  
 })
 export class AppComponent {
   constructor() {}

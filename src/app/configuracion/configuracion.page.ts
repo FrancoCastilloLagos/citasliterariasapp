@@ -13,12 +13,10 @@ export class ConfiguracionPage {
   configBorrar: boolean;
 
   constructor(private configuracionService: ConfiguracionService) {
-    // Recupera el estado actual del switch
     this.configBorrar = this.configuracionService.obtenerConfigBorrar();
   }
 
   cambiarConfigBorrar() {
-    // Actualiza el estado del switch en el servicio
     this.configuracionService.establecerConfigBorrar(this.configBorrar);
   }
 }
