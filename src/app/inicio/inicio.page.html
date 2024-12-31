@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Cita aleatoria -->
+  <ion-card *ngIf="citaAleatoria">
+    <ion-card-header>
+      <ion-card-title>Cita Aleatoria</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ citaAleatoria.frase }}</p>
+      <p><strong>- {{ citaAleatoria.autor }}</strong></p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón para cambiar la cita -->
+  <ion-button (click)="cambiarCita()" expand="full" color="primary">Cambiar Cita</ion-button>
+
+  <!-- Botón rojo para borrar la cita (solo visible si el switch está activado) -->
+  <ion-button *ngIf="mostrarBotonBorrar" (click)="borrarCita()" expand="full" color="danger">
+    Borrar Cita
+  </ion-button>
+
+  <!-- Botones para navegar entre páginas -->
+  <ion-button expand="full" routerLink="/gestioncitas">Ir a Gestión de Citas</ion-button>
+  <ion-button expand="full" routerLink="/configuracion">Ir a Configuración</ion-button>
+</ion-content>

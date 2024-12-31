@@ -1,0 +1,13 @@
+<ion-card *ngIf="cita">
+  <ion-card-header>
+    <ion-card-title>Cita Aleatoria</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{ cita.frase }}</p>
+    <p><strong>- {{ cita.autor }}</strong></p>
+  </ion-card-content>
+</ion-card>
+
+<ion-button *ngIf="mostrarBorrar" (click)="borrarCita()" expand="full" color="danger">
+  Borrar Cita
+</ion-button>
